@@ -88,10 +88,11 @@ el RBF validado como consecuencia de la unificación.
 - [ ] Cerrar las ambigüedades restantes de alcance GPL y procedencia histórica
   enumeradas en la auditoría; no confundir fuentes candidatas con correspondencia
   completa demostrada.
-- [ ] Publicación autorizada el 2026-10-02 en
+- [x] Publicación realizada el 2026-10-02 en
   `https://github.com/neofreno/vlc-groovy-mister`, conservando visibles los
-  puntos pendientes de la auditoría. Se prepara una instantánea con historial
-  nuevo, sin reescribir ni publicar el historial del repositorio local original.
+  puntos pendientes de la auditoría. Rama `main`, importación inicial `751151d`;
+  instantánea con historial nuevo, sin reescribir ni publicar el historial del
+  repositorio local original.
 
 No se reabren las pruebas físicas prolongadas ni las medidas de CPU/WaitSync
 que el usuario decidió descartar. Los builds locales no equivalen a validación
