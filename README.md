@@ -23,12 +23,16 @@ arquitectura debe coincidir con VLC y XDP requiere un entorno MiSTer preparado.
 4. En **Audio → Filtros**, activar **Groovy Mister**. Seleccionar solo la salida
    de vídeo no envía audio: el filtro de audio se activa por separado, aunque
    ambos estén en la misma DLL. Mantener el audio de VLC habilitado.
-5. En **Entrada/Códecs**, desactivar la **decodificación acelerada por hardware**.
+5. En **Interfaz → Interfaces de control**, activar **Groovy Mister**. Esta
+   interfaz auxiliar sincroniza y guarda los campos de timings cuando se elige
+   un preset fijo, incluso sin reproducir vídeo. Mantener la interfaz habitual
+   de VLC: Groovy se añade como interfaz adicional, no la sustituye.
+6. En **Entrada/Códecs**, desactivar la **decodificación acelerada por hardware**.
    Esta ruta trabaja con imágenes en memoria; no admite superficies opacas
-   D3D9/D3D11. No necesita un filtro de vídeo ni una interfaz de control adicional.
-6. Para empezar en un CRT 4:3 de 15 kHz: **Video Mode = Automatic**, **15 kHz
+   D3D9/D3D11. No activar el antiguo filtro de vídeo Groovy.
+7. Para empezar en un CRT 4:3 de 15 kHz: **Video Mode = Automatic**, **15 kHz
    only (Automatic) activado** y **Aspect Ratio activado**. Guardar y reiniciar VLC.
-7. Cargar el core Groovy en MiSTer y abrir un vídeo en VLC. Empezar con Ethernet
+8. Cargar el core Groovy en MiSTer y abrir un vídeo en VLC. Empezar con Ethernet
    directa, MTU 1500 y Jumbo Frames desactivado.
 
 **Importante para CRT:** el límite de 15 kHz solo afecta al modo automático
@@ -42,6 +46,7 @@ Ejemplo desde PowerShell en el PC de reproducción, con VLC cerrado previamente:
 & 'C:\Program Files\VideoLAN\VLC\vlc.exe' `
   --vout=vlc_groovy_mister `
   --audio-filter=vlc_groovy_mister `
+  --extraintf=vlc_groovy_mister `
   --avcodec-hw=none `
   --mister-groovy-host=192.168.2.11 `
   --mister-groovy-modeline=1 `
@@ -56,6 +61,14 @@ Adaptar la IP y las rutas. Para VLC x86, la instalación suele estar en
 audio local: si no se desea escuchar el PC, silenciar sus altavoces sin desactivar
 la decodificación de audio en VLC. Para rutas de instalación, runtime Microsoft,
 caché del plugin, red y solución de problemas, ver [la guía completa](INSTALACION_Y_USO.md).
+
+La configuración completa activa Groovy en **salida de vídeo, filtro de audio
+e interfaces de control**. Cada componente cumple una función distinta: la
+interfaz auxiliar completa los campos de los presets; el vídeo y el mando
+funcionan desde la salida activa y el audio requiere su filtro. La interfaz
+auxiliar no calcula los campos de Automatic ni modifica los timings de Manual.
+Si ya se usan otras interfaces adicionales, conservarlas al configurar
+`extraintf`. No usar `--intf=vlc_groovy_mister`, que reemplazaría la interfaz principal.
 
 ## Parámetros del plugin
 

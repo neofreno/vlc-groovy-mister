@@ -7,17 +7,17 @@ el paquete Windows que coincida con **VLC**, y el paquete de receptores:
 
 | Paquete | Contenido principal |
 |---|---|
-| `vlc-groovy-mister-v1.0.0-rc1-windows-x64.zip` | `libgroovy_mister64_plugin.dll`, para VLC de 64 bits |
-| `vlc-groovy-mister-v1.0.0-rc1-windows-x86.zip` | `libgroovy_mister_plugin.dll`, para VLC de 32 bits |
-| `vlc-groovy-mister-v1.0.0-rc1-receivers.zip` | `MiSTer_groovy`, `MiSTer_groovy_XDP`, `MiSTer_groovy_wifi` |
-| `vlc-groovy-mister-v1.0.0-rc1-sources.zip` | Fuentes del proyecto, scripts, SDK, dependencias y documentación de licencias |
+| `vlc-groovy-mister-v1.0.0-rc2-windows-x64.zip` | `libgroovy_mister64_plugin.dll`, para VLC de 64 bits |
+| `vlc-groovy-mister-v1.0.0-rc2-windows-x86.zip` | `libgroovy_mister_plugin.dll`, para VLC de 32 bits |
+| `vlc-groovy-mister-v1.0.0-rc2-receivers.zip` | `MiSTer_groovy`, `MiSTer_groovy_XDP`, `MiSTer_groovy_wifi` |
+| `vlc-groovy-mister-v1.0.0-rc2-sources.zip` | Fuentes del proyecto, scripts, SDK, dependencias y documentación de licencias |
 
 Los ZIP binarios incluyen instrucciones, avisos y manifiesto de compilación.
 `SHA256SUMS.txt` identifica los archivos descargables; se puede comprobar un ZIP
 con `Get-FileHash .\nombre-del-paquete.zip -Algorithm SHA256` en PowerShell.
 No hace falta compilar las fuentes para instalar los binarios.
 
-Esta primera entrega es una **release candidata**: DLL x64 y x86 compiladas,
+Esta entrega es una **release candidata**: DLL x64 y x86 compiladas,
 23/23 pruebas locales por arquitectura y comprobaciones estáticas ARM. x86
 todavía requiere prueba real en VLC/MiSTer. No se ha ejecutado VLC ni conectado
 una MiSTer en el equipo de compilación. No se incluye un RBF ni un kernel nuevo.
@@ -132,11 +132,21 @@ En Herramientas → Preferencias, seleccionar **Mostrar ajustes: Todo**:
    **4:3**. Un vídeo panorámico tendrá bandas; desactivarlo estira la imagen.
 5. **Audio → Filtros: activar Groovy Mister**. Aunque todo esté en una sola DLL,
    el filtro de audio se activa por separado. Sin él puede haber imagen sin sonido.
-6. Entrada/Códecs: desactivar decodificación acelerada por hardware. También se
+6. **Interfaz → Interfaces de control: activar Groovy Mister**. La interfaz
+   auxiliar rellena y guarda los campos de la modeline al elegir un preset fijo,
+   incluso sin reproducción. Se añade a la interfaz habitual de VLC; no la sustituye.
+7. Entrada/Códecs: desactivar decodificación acelerada por hardware. También se
    puede usar `--avcodec-hw=none`. Las superficies opacas D3D9/D3D11 no están
    admitidas por esta ruta; no seleccionar otra salida de vídeo como OpenGL.
-7. Guardar y reiniciar VLC. No activar el antiguo filtro de vídeo Groovy ni una
-   interfaz de control adicional: el mando se gestiona desde la salida activa.
+8. Guardar y reiniciar VLC. No activar el antiguo filtro de vídeo Groovy.
+
+La configuración completa utiliza **salida de vídeo + filtro de audio + interfaz
+de control Groovy**. Esta última es el asistente de presets: no rellena Automatic
+ni cambia Manual. El envío de vídeo y el mando dependen de la salida de vídeo,
+no de esa interfaz auxiliar. El log `groovy mister config helper interface opened`
+confirma que se ha abierto; `modeline preset ... synced to fields` indica una
+sincronización. Si la ventana de preferencias conserva valores anteriores,
+cerrarla y abrirla de nuevo para consultar los campos guardados.
 
 Mantener el audio de VLC habilitado: no usar `--no-audio`. El filtro copia el
 audio hacia MiSTer y conserva el bloque para la salida local, por lo que puede
@@ -149,6 +159,7 @@ Ejemplo PowerShell completo para un CRT 4:3 de 15 kHz, en el PC de reproducción
 & 'C:\Program Files\VideoLAN\VLC\vlc.exe' `
   --vout=vlc_groovy_mister `
   --audio-filter=vlc_groovy_mister `
+  --extraintf=vlc_groovy_mister `
   --avcodec-hw=none `
   --mister-groovy-host=192.168.2.11 `
   --mister-groovy-modeline=1 `
@@ -163,6 +174,9 @@ Adaptar IP, ruta VLC y fichero; en x86 normalmente cambia `Program Files` por
 opciones nuevas. Para uso diario también se puede abrir el vídeo desde la UI.
 El comando define el filtro de audio de esa ejecución; si se necesitan otros
 filtros, conservarlos en la configuración correspondiente.
+Igualmente, conservar otras interfaces adicionales que ya se utilicen.
+`--extraintf` añade Groovy; no sustituirlo por `--intf`, que reemplaza la interfaz
+principal de VLC.
 
 ## 7. Ajustes durante la reproducción y mando
 

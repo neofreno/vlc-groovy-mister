@@ -31,7 +31,7 @@
 #define VERSION_AUTHOR    "alexxnr"
 #define VERSION_COPYRIGHT "(C) 2025 " VERSION_AUTHOR
 #define VERSION_LICENSE   "LGPL-2.1-or-later"
-#define VERSION_HOMEPAGE  "https://github.com/alexxnr"
+#define VERSION_HOMEPAGE  "https://github.com/neofreno/vlc-groovy-mister"
 
 #define XSTR(s) STR(s)
 #define STR(s) #s

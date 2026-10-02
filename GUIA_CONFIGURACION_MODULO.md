@@ -35,15 +35,22 @@ Sin activar el modulo, las opciones `mister-groovy-*` no se aplican.
 3. Selecciona la salida de video Groovy Mister en:
   - Video -> Salida
   - Modulo de salida de video: "Groovy Mister" (o nombre equivalente).
-4. Guarda cambios y reinicia VLC.
+4. En Interfaz -> Interfaces de control, activa "Groovy Mister" para que la
+   interfaz auxiliar sincronice los campos de modeline al seleccionar un preset.
+5. Guarda cambios y reinicia VLC.
 
 Alternativa por linea de comandos:
 
 ```bash
 --vout=vlc_groovy_mister
+--extraintf=vlc_groovy_mister
 ```
 
-Nota: en modo video_out puro no necesitas activar filtro de video ni interfaz de control.
+No activar el antiguo filtro de vídeo. La interfaz de control Groovy es auxiliar:
+rellena y guarda los timings de los presets fijos, incluso sin vídeo. Activarla
+para la configuración completa; no sustituye la interfaz principal de VLC ni
+es la encargada de enviar vídeo o gestionar el mando. No rellena Automatic ni
+altera los valores de Manual. No usar `--intf` en lugar de `--extraintf`.
 Para enviar también audio, activar Groovy Mister en Audio -> Filtros, o usar
 `--audio-filter=vlc_groovy_mister`. Mantener el audio de VLC habilitado.
 
