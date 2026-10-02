@@ -1,0 +1,122 @@
+[
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/bluetooth/libbluetooth.so",
+    "bytes": 150312,
+    "sha256": "9cc252960ae8606d3d77249718126d33cddbad4ff1a82116b2929b88f22ba06a"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/imlib2/libbz2.so",
+    "bytes": 78616,
+    "sha256": "b630fc09d1e2f2072650419d37444b2fd90401cd63c0aac21e27422bf7ee122a"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/imlib2/libfreetype.so",
+    "bytes": 602356,
+    "sha256": "e9237dd7ebc50df8c17d474da9846c414fdacab2dd2f811f8ebcc0765dad0aaa"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/imlib2/libImlib2.so",
+    "bytes": 200172,
+    "sha256": "8745821f6936b3ccd75c7e3b546600edc0576093a9b14c7c17d1a322f40e8ae7"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/imlib2/libpng16.so",
+    "bytes": 196964,
+    "sha256": "927e7f4d91b00e59fcf4cfa9802c75cb3a5186d5efdbdea3bebaeb1743aba951"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/imlib2/libz.so",
+    "bytes": 98072,
+    "sha256": "0f1286438b87d7449d67f7d056ea7da83fbb41818f0e5178c39090ce44ed2694"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libbpf/libbpf.a",
+    "bytes": 346746,
+    "sha256": "d96db2dec721bc152487f7a23274eb33cc831a992e0489223b94a1ecd19c02f7"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libbpf/libbpf.so",
+    "bytes": 231148,
+    "sha256": "ab928abedd9e3f6cab3a2017389d0b0aa854b781673f1798920e45c1f322951e"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libbpf/libbpf.so.0",
+    "bytes": 231148,
+    "sha256": "ab928abedd9e3f6cab3a2017389d0b0aa854b781673f1798920e45c1f322951e"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libbpf/libbpf.so.0.7.0",
+    "bytes": 231148,
+    "sha256": "ab928abedd9e3f6cab3a2017389d0b0aa854b781673f1798920e45c1f322951e"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libelf/libelf.a",
+    "bytes": 187226,
+    "sha256": "0f915e1e19ef2f62529feed792a9887df55e405d2dae0aba0c40fadd0e93c686"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libelf/libelf.so",
+    "bytes": 67292,
+    "sha256": "2ec6ea4093295ece44b33cd394db5b6062978db00640d64f515135b1406bc881"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libxdp/libxdp.a",
+    "bytes": 82324,
+    "sha256": "ba6eece1bc5e83717c7ce435a5beb0fa6da1dfeb7835c00eb4980dd3617e9ee0"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libxdp/libxdp.so",
+    "bytes": 38240,
+    "sha256": "7a97a25375972f90488bd5204d07eb2f8466d8b614cbc4a0b31eac00a624209f"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libxdp/libxdp.so.1",
+    "bytes": 38240,
+    "sha256": "7a97a25375972f90488bd5204d07eb2f8466d8b614cbc4a0b31eac00a624209f"
+  },
+  {
+    "file": "Groovy_MiSTer/hps_linux/src/lib/libxdp/libxdp.so.1.2.0",
+    "bytes": 38240,
+    "sha256": "7a97a25375972f90488bd5204d07eb2f8466d8b614cbc4a0b31eac00a624209f"
+  },
+  {
+    "file": "sdk/lib/libvlc.lib",
+    "bytes": 258408,
+    "sha256": "261b55f3860cefc3137779b63c9e9261cca8a804d5766aeef4bfdefe0fa2be83"
+  },
+  {
+    "file": "sdk/lib/libvlccore.lib",
+    "bytes": 588480,
+    "sha256": "cfce05f4026d819a4ed4f9a31cc6c5fa98ce21aab9260f93c2fa1618158a424a"
+  },
+  {
+    "file": "sdk/lib/vlc.lib",
+    "bytes": 18,
+    "sha256": "fbd6ba6c0dadefa897bbd95b420d2d181a3ce7a4834dbabfce1ae6ec68e09458"
+  },
+  {
+    "file": "sdk/lib/vlccore.lib",
+    "bytes": 22,
+    "sha256": "d665fc95fdf870c1db98548b8d333b3859c65f6541e98d8c0f81bb96515dc10d"
+  },
+  {
+    "file": "sdk/lib64/libvlc.lib",
+    "bytes": 259044,
+    "sha256": "6d93a4efd4b4369860d8462cc50787d8075626a510a025cc0c6ffa96956a59a2"
+  },
+  {
+    "file": "sdk/lib64/libvlccore.lib",
+    "bytes": 589958,
+    "sha256": "84814d5eed8e54678ed2e3261fca0a5b915088ee618cdceaff88191cb0069c7c"
+  },
+  {
+    "file": "sdk/lib64/vlc.lib",
+    "bytes": 18,
+    "sha256": "fbd6ba6c0dadefa897bbd95b420d2d181a3ce7a4834dbabfce1ae6ec68e09458"
+  },
+  {
+    "file": "sdk/lib64/vlccore.lib",
+    "bytes": 22,
+    "sha256": "d665fc95fdf870c1db98548b8d333b3859c65f6541e98d8c0f81bb96515dc10d"
+  }
+]

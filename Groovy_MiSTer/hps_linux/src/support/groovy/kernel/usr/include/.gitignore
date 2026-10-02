@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: GPL-2.0-only
+# These exported UAPI headers are versioned build inputs in the unified tree.
+# Kernel header-install dependency records are local generated metadata.
+*.cmd

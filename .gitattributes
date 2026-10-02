@@ -1,0 +1,8 @@
+*.sh text eol=lf
+Makefile text eol=lf
+*.mk text eol=lf
+*.py text eol=lf
+*.a binary
+*.so binary
+*.lib binary
+*.dll binary

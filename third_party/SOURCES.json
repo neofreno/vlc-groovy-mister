@@ -1,0 +1,86 @@
+[
+  {
+    "file": "sources/bluez-5.43.tar.xz",
+    "url": "https://www.kernel.org/pub/linux/bluetooth/bluez-5.43.tar.xz",
+    "bytes": 1658348,
+    "sha256": "16c9c05d2a1da644ce3570d975ada3643d2e60c007a955bac09c0a0efeb58d15"
+  },
+  {
+    "file": "sources/bluez-5.54.tar.xz",
+    "url": "https://www.kernel.org/pub/linux/bluetooth/bluez-5.54.tar.xz",
+    "bytes": 2003760,
+    "sha256": "68cdab9e63e8832b130d5979dc8c96fdb087b31278f342874d992af3e56656dc"
+  },
+  {
+    "file": "sources/buildroot-2017.02.tar.gz",
+    "url": "https://buildroot.org/downloads/buildroot-2017.02.tar.gz",
+    "bytes": 5845161,
+    "sha256": "9f2af8f3995b94323c1bca8539b7302ed0ef89dacec42129d08cc7c3cc8ae7ea"
+  },
+  {
+    "file": "sources/bzip2-1.0.6.tar.gz",
+    "url": "https://sourceware.org/pub/bzip2/bzip2-1.0.6.tar.gz",
+    "bytes": 782025,
+    "sha256": "a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd"
+  },
+  {
+    "file": "sources/elfutils_0.183-1.debian.tar.xz",
+    "url": "https://archive.debian.org/debian/pool/main/e/elfutils/elfutils_0.183-1.debian.tar.xz",
+    "bytes": 33396,
+    "sha256": "e64d82677a9f12344210f2294f8738ce649fbac0ebec20f2354f39d8bd4698ce"
+  },
+  {
+    "file": "sources/elfutils_0.183-1.dsc",
+    "url": "https://archive.debian.org/debian/pool/main/e/elfutils/elfutils_0.183-1.dsc",
+    "bytes": 3036,
+    "sha256": "540e9b9c5d25d8567cb8e82444baef433fc4add627b4ce09185a9527a33113af"
+  },
+  {
+    "file": "sources/elfutils_0.183.orig.tar.bz2",
+    "url": "https://archive.debian.org/debian/pool/main/e/elfutils/elfutils_0.183.orig.tar.bz2",
+    "bytes": 9109254,
+    "sha256": "c3637c208d309d58714a51e61e63f1958808fead882e9b607506a29e5474f2c5"
+  },
+  {
+    "file": "sources/freetype-2.7.1.tar.bz2",
+    "url": "https://sources.buildroot.net/freetype-2.7.1.tar.bz2",
+    "bytes": 1825107,
+    "sha256": "3a3bb2c4e15ffb433f2032f50a5b5a92558206822e22bfe8cbe339af4aa82f88"
+  },
+  {
+    "file": "sources/imlib2-1.4.9.tar.bz2",
+    "url": "https://sources.buildroot.net/imlib2-1.4.9.tar.bz2",
+    "bytes": 892290,
+    "sha256": "7d2864972801823ce44ca8d5584a67a88f0e54e2bf47fa8cf4a514317b4f0021"
+  },
+  {
+    "file": "sources/libbpf-0.7.0.tar.gz",
+    "url": "https://codeload.github.com/libbpf/libbpf/tar.gz/refs/tags/v0.7.0",
+    "bytes": 900125,
+    "sha256": "5083588ce5a3a620e395ee1e596af77b4ec5771ffc71cff2af49dfee38c06361"
+  },
+  {
+    "file": "sources/libpng-1.6.28.tar.xz",
+    "url": "https://sources.buildroot.net/libpng-1.6.28.tar.xz",
+    "bytes": 984536,
+    "sha256": "d8d3ec9de6b5db740fefac702c37ffcf96ae46cb17c18c1544635a3852f78f7a"
+  },
+  {
+    "file": "sources/vlc-3.0.16.tar.xz",
+    "url": "https://download.videolan.org/pub/videolan/vlc/3.0.16/vlc-3.0.16.tar.xz",
+    "bytes": 26439328,
+    "sha256": "ffae35fc64f625c175571d2346bc5f6207be99762517f15423e74f18399410f6"
+  },
+  {
+    "file": "sources/xdp-tools-1.2.0.tar.gz",
+    "url": "https://codeload.github.com/xdp-project/xdp-tools/tar.gz/refs/tags/v1.2.0",
+    "bytes": 233676,
+    "sha256": "8336207ecb342debb85c11ec1fefd2c7b47c1f790bef0c6d8cbe48ab7c22f26c"
+  },
+  {
+    "file": "sources/zlib-1.2.11.tar.xz",
+    "url": "https://sources.buildroot.net/zlib-1.2.11.tar.xz",
+    "bytes": 467960,
+    "sha256": "4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19bf066"
+  }
+]

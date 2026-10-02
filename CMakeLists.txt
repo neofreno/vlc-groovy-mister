@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.22)
+project(vlc_groovy_validation LANGUAGES C CXX)
+enable_testing()
+add_subdirectory(tests)
+add_subdirectory(Groovy_MiSTer/tests)
+add_subdirectory(tests/reconnect)

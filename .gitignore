@@ -1,0 +1,51 @@
+.vs/
+
+# Visual Studio intermediate/build outputs
+**/Debug/
+**/Release/
+**/x64/Debug/
+**/x64/Release/
+**/*.obj
+**/*.iobj
+**/*.ipdb
+**/*.ilk
+**/*.idb
+**/*.pdb
+**/*.exp
+**/*.lib
+**/*.dll
+**/*.log
+**/*.tlog/
+**/*.lastbuildstate
+
+# Standalone video pipeline checks (CMake/CTest)
+/x64/video-tests/
+/x64/video-tests-asan/
+/x64/api-tests/
+/dist/
+/x64/xdp-baseline.tar
+/build/
+/x64/reconnect-tests/
+**/__pycache__/
+**/*.pyc
+**/*.vcxproj.user
+/Groovy_MiSTer/api/libgroovymister.lib
+/Groovy_MiSTer/db/
+/Groovy_MiSTer/incremental_db/
+/Groovy_MiSTer/output_files/
+/Groovy_MiSTer/*.rbf
+/Groovy_MiSTer/*.qws
+/Groovy_MiSTer/hps_linux/MiSTer_groovy*
+**/*.cpp.o
+**/*.c.o
+**/*.png.o
+**/*.cpp.d
+**/*.c.d
+/.vscode/
+/groovymister/
+/lz4/
+# Import libraries supplied with the VLC SDK are build inputs, not output.
+!/sdk/lib/*.lib
+!/sdk/lib64/*.lib
+# License text, not a compiled library (Windows matches .LIB case-insensitively).
+!/sdk/COPYING.LIB
