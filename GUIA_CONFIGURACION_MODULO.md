@@ -2,6 +2,10 @@
 
 Esta guia resume como configurar el plugin en VLC para enviar video/audio a MiSTer.
 
+Para una instalación desde cero, consultar primero
+[Instalación y uso de la release](INSTALACION_Y_USO.md), incluida la activación
+del filtro de audio; seleccionar la salida de vídeo por sí sola no envía sonido.
+
 ## Donde colocar la DLL
 
 En Windows, copia la DLL compilada del plugin dentro de la carpeta `plugins` de tu instalacion de VLC.
@@ -40,6 +44,8 @@ Alternativa por linea de comandos:
 ```
 
 Nota: en modo video_out puro no necesitas activar filtro de video ni interfaz de control.
+Para enviar también audio, activar Groovy Mister en Audio -> Filtros, o usar
+`--audio-filter=vlc_groovy_mister`. Mantener el audio de VLC habilitado.
 
 ## Donde se configura
 

@@ -4,6 +4,13 @@ Plugin de salida de vídeo para VLC 3 en Windows x64, con audio y control desde
 los mandos de MiSTer. Este repositorio reúne el emisor, la API de transporte,
 los tres receptores ARM y las fuentes del core FPGA.
 
+## Descargar e instalar
+
+Las [releases](https://github.com/neofreno/vlc-groovy-mister/releases) incluyen
+los tres receptores y plugins Windows para VLC x64 y x86. Consulta la
+[guía de instalación y uso](INSTALACION_Y_USO.md) antes de copiarlos: la
+arquitectura debe coincidir con VLC y XDP requiere un entorno MiSTer preparado.
+
 ## Organización
 
 | Carpeta | Contenido |
@@ -35,7 +42,12 @@ Para las pruebas: CMake ≥ 3.22 y Python 3 en PATH.
 Resultado Release x64: `x64/Release/libgroovy_mister64_plugin.dll`.
 También se puede abrir `vlc-groovy-mister.sln`. La API y LZ4 se recompilan como
 dependencia de la DLL; las carpetas antiguas `groovymister/` y `lz4/` ya no se usan.
-La configuración validada es **Release x64 / VLC 3**; Win32 no está validada.
+Para VLC de 32 bits: `./scripts/build-windows.ps1 -Platform x86 -Test`.
+Resultado: `Release/libgroovy_mister_plugin.dll`. Ejecutar las suites x64/x86
+una después de otra, no simultáneamente, porque comparten puertos de loopback.
+Ambas arquitecturas compilan en Release y superan 23/23 pruebas (2026-10-02).
+La DLL x86 no se ha probado físicamente en VLC/MiSTer; las pruebas locales no
+equivalen a esa validación. Ver las notas de la release.
 
 Para ejecutar solamente la suite conjunta:
 
