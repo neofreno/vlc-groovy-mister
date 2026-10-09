@@ -1,5 +1,19 @@
 # Pruebas del stream de video
 
+## Regresión del formato de audio — 2026-10-09
+
+`audio_filter_passthrough_tests` utiliza los tipos reales del SDK VLC incluido y
+el mismo helper del filtro. Comprueba 27 combinaciones de 22050/44100/48000 Hz
+y mono/estéreo/6 canales, preservación del formato y duración, e independencia
+de los buffers propiedad de cada `es_format_t`. No se inicializa VLC.
+Con `--simulate-old` omite la corrección y debe fallar en 44100 → 48000 Hz:
+es el control negativo, no una prueba normal de CTest. La suite raíz suma 24 pruebas.
+
+Esto verifica el contrato de formatos del helper, no el remuestreador real de
+VLC ni la desaparición física de los microcortes. El log del plugin muestra
+`passthrough=1`, `in_rate`, `out_rate`, `requested_out_rate` y `mister_rate` para
+verificar después la negociación en el PC de reproducción.
+
 No abren VLC ni conectan a MiSTer. Compilan los mismos helpers CPU utilizados por el plugin.
 Requieren CMake >= 3.22 y Visual Studio 2022 con herramientas C++.
 

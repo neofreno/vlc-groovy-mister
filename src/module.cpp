@@ -46,6 +46,7 @@
 #include <vlc_playlist.h>
 #include <new>
 #include "interface_timer.h"
+#include "audio_filter_passthrough.h"
 
 
 
@@ -477,12 +478,6 @@ static int OpenFilterAudio(vlc_object_t* p_this)
         return VLC_EGENERIC;
     }
 
-    msg_Dbg(p_filter,
-        "filter Audio sub-plugin opened: in_codec=%4.4s out_codec=%4.4s rate=%u channels=%u",
-        (const char*)&p_filter->fmt_in.audio.i_format,
-        (const char*)&p_filter->fmt_out.audio.i_format,
-        input.i_rate,
-        2u);
     p_filter->pf_audio_filter = filterAudio;
     p_filter->pf_flush = FlushFilterAudio;
     p_filter->p_sys = new (std::nothrow) filter_sys_t;
@@ -494,6 +489,20 @@ static int OpenFilterAudio(vlc_object_t* p_this)
         audio_filter_active = false;
         return VLC_ENOMEM;
     }
+    // Commit the format only after all fallible setup has succeeded. VLC may
+    // propose the device's format (e.g. 48 kHz) even for 44.1 kHz input. We do
+    // not resample the returned block: let VLC insert its downstream converter.
+    const unsigned requestedOutputRate = p_filter->fmt_out.audio.i_rate;
+    audio_stream::preserveFilterFormat(p_filter->fmt_out, p_filter->fmt_in);
+    msg_Dbg(p_filter,
+        "filter Audio sub-plugin opened: passthrough=1 in_codec=%4.4s out_codec=%4.4s "
+        "in_rate=%u out_rate=%u in_channels=%u out_channels=%u "
+        "requested_out_rate=%u mister_rate=%u mister_channels=2",
+        (const char*)&p_filter->fmt_in.audio.i_format,
+        (const char*)&p_filter->fmt_out.audio.i_format,
+        input.i_rate, p_filter->fmt_out.audio.i_rate,
+        unsigned(input.i_channels), unsigned(p_filter->fmt_out.audio.i_channels),
+        requestedOutputRate, input.i_rate);
     p_filter->p_sys->input = HoldAudioInput(p_filter);
     if (p_filter->p_sys->input) {
         var_AddCallback(p_filter->p_sys->input, "intf-event", AudioInputEvent, nullptr);
