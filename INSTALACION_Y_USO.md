@@ -7,10 +7,17 @@ el paquete Windows que coincida con **VLC**, y el paquete de receptores:
 
 | Paquete | Contenido principal |
 |---|---|
-| `vlc-groovy-mister-v1.0.0-rc2-windows-x64.zip` | `libgroovy_mister64_plugin.dll`, para VLC de 64 bits |
-| `vlc-groovy-mister-v1.0.0-rc2-windows-x86.zip` | `libgroovy_mister_plugin.dll`, para VLC de 32 bits |
-| `vlc-groovy-mister-v1.0.0-rc2-receivers.zip` | `MiSTer_groovy`, `MiSTer_groovy_XDP`, `MiSTer_groovy_wifi` |
-| `vlc-groovy-mister-v1.0.0-rc2-sources.zip` | Fuentes del proyecto, scripts, SDK, dependencias y documentación de licencias |
+| `vlc-groovy-mister-<version>-windows-x64.zip` | `libgroovy_mister64_plugin.dll`, para VLC de 64 bits |
+| `vlc-groovy-mister-<version>-windows-x86.zip` | `libgroovy_mister_plugin.dll`, para VLC de 32 bits |
+| `vlc-groovy-mister-<version>-receivers.zip` | `MiSTer_groovy`, `MiSTer_groovy_XDP`, `MiSTer_groovy_wifi` |
+| `vlc-groovy-mister-<version>-sources.zip` | Fuentes del proyecto, scripts, SDK, dependencias y documentación de licencias |
+
+`<version>` es `v1.0.0-rc1` o `v1.0.0-rc2`, según la release elegida. Los assets
+de ambas se actualizan el 2026-10-10 con la corrección de audio de `70ef036`.
+Los tags históricos no se mueven: para las fuentes de los binarios actualizados,
+descargar el asset `vlc-groovy-mister-<version>-sources.zip`, **no** los enlaces
+automáticos de GitHub «Source code (zip/tar.gz)», que siguen representando el tag
+original. `BUILD_MANIFEST.json` identifica el commit del paquete actualizado.
 
 Los ZIP binarios incluyen instrucciones, avisos y manifiesto de compilación.
 `SHA256SUMS.txt` identifica los archivos descargables; se puede comprobar un ZIP
@@ -18,7 +25,7 @@ con `Get-FileHash .\nombre-del-paquete.zip -Algorithm SHA256` en PowerShell.
 No hace falta compilar las fuentes para instalar los binarios.
 
 Esta entrega es una **release candidata**: DLL x64 y x86 compiladas,
-23/23 pruebas locales por arquitectura y comprobaciones estáticas ARM. x86
+24/24 pruebas locales por arquitectura y comprobaciones estáticas ARM. x86
 todavía requiere prueba real en VLC/MiSTer. No se ha ejecutado VLC ni conectado
 una MiSTer en el equipo de compilación. No se incluye un RBF ni un kernel nuevo.
 

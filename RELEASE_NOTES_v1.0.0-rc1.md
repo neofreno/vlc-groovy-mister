@@ -1,77 +1,57 @@
-# VLC → Groovy MiSTer v1.0.0-rc1
+# VLC → Groovy MiSTer v1.0.0-rc1 — actualización de audio 2026-10-10
 
-Primera release unificada: salida de vídeo y filtro de audio para VLC 3 en
-Windows **x64 y x86**, junto a los receptores **UDP, XDP y Wi-Fi** para MiSTer.
+**Los archivos descargables de esta release se han actualizado.** Incluyen la
+corrección de audio del commit
+[`70ef036`](https://github.com/neofreno/vlc-groovy-mister/commit/70ef0365ed614246022ec3c9ae58be9e64a8ec10),
+la homepage del repositorio y la configuración completa de la interfaz Groovy.
+RC1 y RC2 actualizadas contienen las mismas DLL corregidas x64/x86.
 
-## Descargas
+## Qué cambia
 
-- `windows-x64.zip`: DLL para VLC de 64 bits.
-- `windows-x86.zip`: DLL para VLC de 32 bits, aunque Windows sea de 64 bits.
-- `receivers.zip`: los tres receptores; seleccionar solo uno en `MiSTer.ini`.
-- `sources.zip`: fuentes del mismo commit, SDK, bibliotecas y fuentes de terceros.
-- `INSTALACION_Y_USO.md`: instrucciones completas, también dentro de los ZIP.
-- `SHA256SUMS.txt`: hashes de los paquetes y la guía.
+- El filtro preserva el formato de audio que devuelve a VLC. Una entrada de
+  44100 Hz ya no se declara erróneamente como 48000 Hz; VLC puede realizar el
+  remuestreo posterior para Windows sin alterar la copia PCM16 enviada a MiSTer.
+- El log distingue `in_rate`, `out_rate`, `requested_out_rate` y `mister_rate`.
+- 24/24 pruebas superadas en x64 y x86; regresión para 27 combinaciones de
+  frecuencia/canales. En el log real aportado desaparecen los silencios
+  correctivos repetitivos y los avisos de deriva. No se certifica todo el hardware.
+- Los tres receptores son **idénticos a los originales de estas releases**.
+  No cambia protocolo, RTL, RBF ni kernel. Los ZIP de receptores se actualizan
+  solo para incorporar documentación y manifiestos coherentes.
 
-Todos los ZIP llevan el prefijo `vlc-groovy-mister-v1.0.0-rc1-`.
+## Qué instalar
 
-## Instalación rápida
+Si ya tienes RC1/RC2, cerrar VLC, respaldar la DLL y sustituir únicamente el
+plugin de su arquitectura dentro de `plugins/video_output/`. No instalar x86 y
+x64 juntas. **No hace falta actualizar los receptores ni el RBF.**
 
-1. Cerrar VLC y respaldar la DLL y la configuración actuales.
-2. Copiar la DLL de la arquitectura de **VLC** a `plugins/video_output/`.
-   No mantener copias antiguas en otras carpetas de plugins. Instalar el runtime
-   Microsoft Visual C++ v14 correspondiente si falta.
-3. Con el stream detenido, copiar los receptores a `/media/fat/` y seleccionar
-   en la sección `[Groovy]` de `MiSTer.ini` uno de estos valores:
+Configurar Groovy en **Vídeo → Módulos de salida**, **Audio → Filtros** e
+**Interfaz → Interfaces de control**. Esta última sincroniza los campos de los
+presets y se añade con `--extraintf=vlc_groovy_mister`. Desactivar la decodificación
+por hardware. Para un CRT de 15 kHz, usar Automatic y su límite de 15 kHz;
+ese límite no protege frente a modos manuales ni al arranque del RBF.
 
-   ```ini
-   [Groovy]
-   main=MiSTer_groovy
-   ```
+Los paquetes llevan el prefijo `vlc-groovy-mister-v1.0.0-rc1-`:
 
-   Alternativas: `MiSTer_groovy_XDP` o `MiSTer_groovy_wifi`. Reiniciar MiSTer
-   normalmente y entrar en el core Groovy. No reemplazar el ejecutable `MiSTer`
-   principal ni el RBF ya validado.
-4. VLC: activar salida de vídeo **Groovy Mister** y filtro de audio **Groovy
-   Mister**, indicar la IP de stream y desactivar la decodificación por hardware.
-5. Empezar con Automatic, MTU 1500 y **15 kHz only (Automatic)** si la pantalla
-   es de 15 kHz. Aspect Ratio conserva la geometría para pantalla física 4:3.
+- `windows-x64.zip` / `windows-x86.zip`: DLL e instrucciones para VLC 3.
+- `receivers.zip`: `MiSTer_groovy`, `MiSTer_groovy_XDP` y `MiSTer_groovy_wifi`.
+- `sources.zip`: fuentes del árbol de esta actualización y dependencias.
+- `INSTALACION_Y_USO.md`: guía completa, también dentro de los paquetes.
+- `SHA256SUMS.txt`: hashes actualizados; no reutilizar los de la descarga anterior.
 
-La guía adjunta incluye rutas exactas x64/x86, ejemplo PowerShell, mando,
-diagnóstico, logs y rollback. **XDP requiere una instalación preparada** con
-kernel/driver AF_XDP, programa BPF y libelf: no se incluyen actualizaciones de
-kernel, rootfs ni RBF. Si no se dispone de ese entorno, utilizar UDP normal.
+XDP requiere Ethernet y un entorno AF_XDP/BPF/libelf ya preparado; no funciona
+por Wi-Fi. Se conserva la compatibilidad legacy/v2 y las mejoras de estabilidad.
 
-## Cambios reunidos
+## Fuentes y trazabilidad: importante
 
-- Cola de vídeo y control de imágenes atrasadas, conversión I420/J420 optimizada.
-- Proporción para pantalla 4:3, selección automática por FPS y cambios de modo
-  durante reproducción, incluido el límite automático a 15 kHz.
-- Recuperación de sesiones, inicio tardío del receptor, pausa/reanudación y
-  correcciones de limpieza tras cold reset compartidas por los tres receptores.
-- Control desde mandos MiSTer y protecciones de cierre/cambio de archivo.
-- Proyecto autosuficiente, scripts de build y fuentes/licencias de dependencias.
+**El tag histórico `v1.0.0-rc1` NO se ha movido.** Los enlaces automáticos de
+GitHub **«Source code (zip/tar.gz)» no contienen esta corrección**. Para recompilar
+las DLL actualizadas, descargar **`vlc-groovy-mister-v1.0.0-rc1-sources.zip`**
+de los assets. Cada ZIP binario identifica su commit en `BUILD_MANIFEST.json`.
+La actualización conserva copias locales de los assets anteriores; RC1 ya no
+es una descarga alternativa del plugin anterior al arreglo de audio.
 
-## Validación y límites
-
-- DLL Release x64 y x86 compiladas con MSVC v143 (14.42); 23/23 pruebas locales
-  por arquitectura. Cabeceras PE, arquitectura, exportaciones VLC 3 y dependencias
-  comprobadas sin iniciar VLC.
-- Receptores reconstruidos con ARM GNU 10.2-2020.11 desde las fuentes de esta
-  release; comprobados ELF ARM hard-float, perfiles, hooks y dependencias.
-- No hay cambios de código de ejecución ni de RTL para preparar esta release.
-  El script Windows añade selección de arquitectura para reproducir el build.
-- **x86 no está probado físicamente en VLC/MiSTer.** Las confirmaciones previas
-  de hardware no equivalen a una prueba física de estos cinco binarios recién
-  compilados. Por ello se publica como pre-release/RC, no como validación final.
-- No se ha ejecutado VLC local ni accedido a una MiSTer para esta entrega.
-- D3D9/D3D11 y otras superficies GPU opacas no están admitidas; usar software.
-- El límite 15 kHz no protege frente a modos manuales ni al arranque del RBF.
-- La versión interna histórica del módulo sigue siendo `1.0.0-dev`; el tag
-  `v1.0.0-rc1` identifica este empaquetado sin alterar metadatos del código.
-- La auditoría de licencias y sus puntos pendientes de procedencia/alcance GPL
-  siguen publicados y acompañan los binarios; no se presentan como resueltos.
-
-Fuentes fijadas por el tag y disponibles como asset `sources.zip` en esta misma
-release. Cada ZIP binario contiene `BUILD_MANIFEST.json` con commit, arquitectura,
-tamaño y SHA-256 de sus artefactos. No se promete igualdad entre compilaciones
-con distinta fecha/toolchain; el build ARM incorpora fecha.
+Se mantiene como pre-release: x86 sigue pendiente de validación física específica.
+No se ha iniciado VLC local ni accedido a MiSTer para compilar. La versión interna
+permanece `1.0.0-dev`. Se conservan licencias y límites de procedencia de la
+auditoría, incluida en los paquetes; esta actualización no los declara resueltos.

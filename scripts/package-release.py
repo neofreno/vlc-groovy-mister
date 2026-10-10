@@ -44,6 +44,8 @@ common = [
     "Groovy_MiSTer/hps_linux/src/lib/zstd/COPYING",
 ]
 common += [p.relative_to(root).as_posix() for p in sorted((root / "LICENSES").rglob("*")) if p.is_file()]
+if (root / "CORRECCION_AUDIO_20261009.md").is_file():
+    common.append("CORRECCION_AUDIO_20261009.md")
 for name in common:
     if not (root / name).is_file():
         raise SystemExit(f"Missing distribution notice: {name}")
@@ -86,7 +88,7 @@ for package, entries in artifacts.items():
         "source_archive": sources_name,
         "source_url": f"https://github.com/neofreno/vlc-groovy-mister/releases/download/{args.version}/{sources_name}",
         "toolchains": {"windows": "MSVC v143 14.42", "arm": "GNU Arm 10.2-2020.11"},
-        "validation": "See release notes; no physical test of these freshly built artifacts; x86 first candidate",
+        "validation": "See release notes and audio correction report for automated tests and limits of physical validation",
         "artifacts": records[package],
     }
     target_zip = out / f"{prefix}-{package}.zip"

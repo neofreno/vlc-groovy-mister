@@ -1,59 +1,57 @@
-# VLC → Groovy MiSTer v1.0.0-rc2
+# VLC → Groovy MiSTer v1.0.0-rc2 — actualización de audio 2026-10-10
 
-Actualización de documentación y homepage del plugin. Se conserva la RC1 para
-poder volver atrás; esta release tiene su propio tag, fuentes y hashes.
+**Los archivos descargables de esta release se han actualizado.** Incluyen la
+corrección de audio del commit
+[`70ef036`](https://github.com/neofreno/vlc-groovy-mister/commit/70ef0365ed614246022ec3c9ae58be9e64a8ec10),
+la homepage del repositorio y la configuración completa de la interfaz Groovy.
+RC1 y RC2 actualizadas contienen las mismas DLL corregidas x64/x86.
 
-## Cambios respecto a RC1
+## Qué cambia
 
-- **Homepage de la pantalla de parámetros de vídeo** actualizada a
-  <https://github.com/neofreno/vlc-groovy-mister>.
-- DLL **x64 y x86 recompiladas** con ese cambio. No se cambian la autoría ni las
-  licencias existentes, ni el funcionamiento del stream, audio o mando.
-- README y guías indican activar Groovy en **Vídeo → Módulos de salida**,
-  **Audio → Filtros** e **Interfaz → Interfaces de control**. Los ejemplos incluyen
-  `--extraintf=vlc_groovy_mister`.
-- Se explica la función de la interfaz auxiliar: sincroniza y guarda los campos
-  de timings de presets fijos, incluso sin reproducir; no sustituye la interfaz
-  principal ni realiza el streaming. No modifica Manual ni rellena Automatic.
-- Los **tres receptores son idénticos a RC1**: se vuelven a empaquetar con la
-  documentación actualizada. No requieren reinstalación si ya se utiliza RC1.
-  Conservan las mejoras de estabilidad de streaming y compatibilidad legacy/v2.
+- El filtro preserva el formato de audio que devuelve a VLC. Una entrada de
+  44100 Hz ya no se declara erróneamente como 48000 Hz; VLC puede realizar el
+  remuestreo posterior para Windows sin alterar la copia PCM16 enviada a MiSTer.
+- El log distingue `in_rate`, `out_rate`, `requested_out_rate` y `mister_rate`.
+- 24/24 pruebas superadas en x64 y x86; regresión para 27 combinaciones de
+  frecuencia/canales. En el log real aportado desaparecen los silencios
+  correctivos repetitivos y los avisos de deriva. No se certifica todo el hardware.
+- Los tres receptores son **idénticos a los originales de estas releases**.
+  No cambia protocolo, RTL, RBF ni kernel. Los ZIP de receptores se actualizan
+  solo para incorporar documentación y manifiestos coherentes.
 
-## Descargas e instalación
+## Qué instalar
 
-Elegir `vlc-groovy-mister-v1.0.0-rc2-windows-x64.zip` o `windows-x86.zip` según
-la arquitectura de **VLC**, no la de Windows. Con VLC cerrado, sustituir su DLL
-en `plugins/video_output/`, conservando una copia anterior fuera de `plugins`.
-No instalar las dos arquitecturas en el mismo VLC.
+Si ya tienes RC1/RC2, cerrar VLC, respaldar la DLL y sustituir únicamente el
+plugin de su arquitectura dentro de `plugins/video_output/`. No instalar x86 y
+x64 juntas. **No hace falta actualizar los receptores ni el RBF.**
 
-En Preferencias → Mostrar ajustes: Todo, activar también **Interfaz → Interfaces
-de control → Groovy Mister**, guardar y reiniciar VLC. Mantener salida de vídeo,
-filtro de audio, IP y ajustes de pantalla. Si la DLL no se actualiza en VLC,
-regenerar la caché con `--reset-plugins-cache`, sin borrar las preferencias.
+Configurar Groovy en **Vídeo → Módulos de salida**, **Audio → Filtros** e
+**Interfaz → Interfaces de control**. Esta última sincroniza los campos de los
+presets y se añade con `--extraintf=vlc_groovy_mister`. Desactivar la decodificación
+por hardware. Para un CRT de 15 kHz, usar Automatic y su límite de 15 kHz;
+ese límite no protege frente a modos manuales ni al arranque del RBF.
 
-El paquete `receivers.zip` incluye `MiSTer_groovy`, `MiSTer_groovy_XDP` y
-`MiSTer_groovy_wifi`; seleccionar solo uno en `[Groovy] main=` de `MiSTer.ini`.
-XDP requiere kernel/driver AF_XDP, BPF y libelf previamente preparados; no funciona
-por Wi-Fi. No se incluye ni cambia RBF, kernel o rootfs.
+Los paquetes llevan el prefijo `vlc-groovy-mister-v1.0.0-rc2-`:
 
-Leer [instalación y uso](https://github.com/neofreno/vlc-groovy-mister/blob/v1.0.0-rc2/INSTALACION_Y_USO.md)
-y [configuración, parámetros y mando](https://github.com/neofreno/vlc-groovy-mister/blob/v1.0.0-rc2/README.md).
-La guía también se adjunta a esta release y a cada paquete binario.
+- `windows-x64.zip` / `windows-x86.zip`: DLL e instrucciones para VLC 3.
+- `receivers.zip`: `MiSTer_groovy`, `MiSTer_groovy_XDP` y `MiSTer_groovy_wifi`.
+- `sources.zip`: fuentes del árbol de esta actualización y dependencias.
+- `INSTALACION_Y_USO.md`: guía completa, también dentro de los paquetes.
+- `SHA256SUMS.txt`: hashes actualizados; no reutilizar los de la descarga anterior.
 
-## Validación y límites
+XDP requiere Ethernet y un entorno AF_XDP/BPF/libelf ya preparado; no funciona
+por Wi-Fi. Se conserva la compatibilidad legacy/v2 y las mejoras de estabilidad.
 
-- MSVC v143 14.42, Release x64 y x86; 23/23 pruebas locales por arquitectura.
-- Arquitecturas PE, exportaciones de VLC 3 y presencia de la nueva homepage
-  comprobadas en ambas DLL sin cargar VLC.
-- Receptores ARM hard-float y perfiles verificados; hashes iguales a RC1.
-- No se ha ejecutado VLC local ni accedido a MiSTer. x86 sigue pendiente de
-  validación física; por ello esta publicación continúa como pre-release.
-- Usar decodificación por software. `15 kHz only` solo limita Automatic y no
-  protege frente a presets/manuales incompatibles ni al arranque del RBF.
-- La versión interna sigue siendo `1.0.0-dev`; el tag identifica el empaquetado.
-- Las limitaciones de licencias/procedencia de la auditoría siguen vigentes.
+## Fuentes y trazabilidad: importante
 
-`sources.zip` contiene las fuentes del mismo commit y las dependencias/avisos.
-Cada paquete binario incluye `BUILD_MANIFEST.json`; `SHA256SUMS.txt` permite
-verificar las descargas. Los ZIP de receptores pueden cambiar de hash por la
-documentación aunque los tres ejecutables internos sean idénticos a RC1.
+**El tag histórico `v1.0.0-rc2` NO se ha movido.** Los enlaces automáticos de
+GitHub **«Source code (zip/tar.gz)» no contienen esta corrección**. Para recompilar
+las DLL actualizadas, descargar **`vlc-groovy-mister-v1.0.0-rc2-sources.zip`**
+de los assets. Cada ZIP binario identifica su commit en `BUILD_MANIFEST.json`.
+La actualización conserva copias locales de los assets anteriores; RC1 ya no
+es una descarga alternativa del plugin anterior al arreglo de audio.
+
+Se mantiene como pre-release: x86 sigue pendiente de validación física específica.
+No se ha iniciado VLC local ni accedido a MiSTer para compilar. La versión interna
+permanece `1.0.0-dev`. Se conservan licencias y límites de procedencia de la
+auditoría, incluida en los paquetes; esta actualización no los declara resueltos.
